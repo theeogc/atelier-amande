@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(echo \"PID: $!\")",
+      "WebFetch(domain:www.404s.design)",
+      "Bash(node -e \"require\\('motion/react'\\)\")",
+      "Bash(mv \"ChatGPT Image 11 mai 2026, 18_05_06.png\" \"chatgpt-1.png\")",
+      "Bash(mv \"ChatGPT Image 23 mai 2026, 11_03_34.png\" \"chatgpt-2.png\")",
+      "Bash(mv \"ChatGPT Image 23 mai 2026, 11_05_34.png\" \"chatgpt-3.png\")",
+      "Bash(mv \"ChatGPT Image 23 mai 2026, 11_07_33.png\" \"chatgpt-4.png\")",
+      "Bash(mv \"ChatGPT Image 23 mai 2026, 11_13_20.png\" \"chatgpt-5.png\")"
+    ]
+  }
+}
