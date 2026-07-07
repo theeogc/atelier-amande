@@ -284,7 +284,7 @@ function ThreeDPhotoCarousel() {
 
 export function Portfolio() {
   return (
-    <section id="portfolio" className="pt-16 pb-8 overflow-x-hidden" style={{ backgroundColor: "#FAF7F3" }}>
+    <section id="portfolio" className="pt-16 pb-8 overflow-x-clip" style={{ backgroundColor: "#FAF7F3" }}>
       <div className="text-center mb-12 px-6">
         <p
           className="text-xs tracking-[0.22em] uppercase mb-4 font-light"

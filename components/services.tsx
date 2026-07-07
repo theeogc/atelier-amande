@@ -199,7 +199,7 @@ export function Services() {
           </p>
           <SectionHeading>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#3A2A1E] mb-4">
-              Nos Prestations
+              Mes Prestations
             </h2>
           </SectionHeading>
           <p className="text-[#6B5A4E] font-light max-w-md mx-auto mt-4 text-sm sm:text-base">

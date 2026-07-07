@@ -119,10 +119,9 @@ Chaque section est un composant client dans `components/`. Ils sont autonomes : 
 - Menu mobile (`AnimatePresence`) séparé en élément `fixed` indépendant (`top-[86px]`)
 
 **`components/portfolio.tsx`** — Section galerie.
-- Utilise `ContainerScroll` de `components/ui/container-scroll-animation.tsx`
-- La "tablette" s'incline de 20° et se remet à plat au scroll
-- 18 vraies photos locales dans `public/portfolio/` (carousel 3D + marquee), compressées (max 1400px, JPEG). Lightbox au clic.
+- 18 vraies photos locales dans `public/portfolio/` (carousel 3D cylindrique sur desktop, deux marquees horizontaux sur mobile), compressées (max 1400px, JPEG). Lightbox au clic.
 - L'auto-rotation du carousel est désactivée si `prefers-reduced-motion` (via `useReducedMotion`)
+- Le `<section>` utilise `overflow-x-clip` (PAS `overflow-x-hidden` : `hidden` force `overflow-y: auto` et crée une barre de défilement interne à cause du débordement 3D du carousel)
 
 **`components/testimonials.tsx`** — Section avis clients.
 - Deux rangées de cartes défilant en sens opposé (marquee CSS pur)
@@ -137,12 +136,6 @@ Chaque section est un composant client dans `components/`. Ils sont autonomes : 
 - Fond `#1a0f0a`, glow ambiant, accents coins
 - "404" en texte outlined (`WebkitTextStroke`) avec glow derrière (`blur(48px)`)
 - CTAs : "Retour à l'accueil" (rose gold) + "Prendre rendez-vous" (Planity, outline)
-
-**`components/ui/container-scroll-animation.tsx`** — Wrapper scroll 3D.
-- Couleurs adaptées : bordure `#B08060`, fond `#F5EFE8`
-- `overflow-y-auto` sur l'intérieur pour le scroll de la galerie
-- Layout : `items-start` + `pt-12 md:pt-16`
-- Hauteur : `h-[50rem] md:h-[62rem]`, padding interne : `py-10 md:py-16`
 
 ### SEO & Métadonnées (`app/layout.tsx`)
 
