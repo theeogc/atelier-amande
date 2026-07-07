@@ -80,12 +80,6 @@ const row2: Review[] = [
     rating: 5,
     text: "Accueil, prestation, ambiance, tout était parfait. Je reviendrais",
   },
-  {
-    name: "Une cliente",
-    source: "Planity",
-    rating: 5,
-    text: "Tout était parfait ! J'y retournerai avec grand plaisir !",
-  },
 ]
 
 function GoogleIcon() {
