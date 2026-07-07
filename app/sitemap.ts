@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.latelierdamande.fr'
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.latelierdamande.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
       images: [
         `${BASE}/logo-monogramme.png`,
-        `${BASE}/about-photo.png`,
+        `${BASE}/about-photo.jpg`,
       ],
     },
     {

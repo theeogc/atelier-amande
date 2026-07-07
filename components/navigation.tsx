@@ -154,7 +154,7 @@ export function Navigation() {
                 <motion.button
                   onClick={(e) => { e.stopPropagation(); setIsMobileMenuOpen(!isMobileMenuOpen) }}
                   className="lg:hidden p-2 text-white/80"
-                  aria-label="Toggle menu"
+                  aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >

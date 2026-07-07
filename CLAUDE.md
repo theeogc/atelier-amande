@@ -121,7 +121,8 @@ Chaque section est un composant client dans `components/`. Ils sont autonomes : 
 **`components/portfolio.tsx`** — Section galerie.
 - Utilise `ContainerScroll` de `components/ui/container-scroll-animation.tsx`
 - La "tablette" s'incline de 20° et se remet à plat au scroll
-- Grille `grid-cols-2 sm:grid-cols-3` de 12 photos Unsplash (placeholders — à remplacer)
+- 18 vraies photos locales dans `public/portfolio/` (carousel 3D + marquee), compressées (max 1400px, JPEG). Lightbox au clic.
+- L'auto-rotation du carousel est désactivée si `prefers-reduced-motion` (via `useReducedMotion`)
 
 **`components/testimonials.tsx`** — Section avis clients.
 - Deux rangées de cartes défilant en sens opposé (marquee CSS pur)
@@ -145,7 +146,9 @@ Chaque section est un composant client dans `components/`. Ils sont autonomes : 
 
 ### SEO & Métadonnées (`app/layout.tsx`)
 
-- `metadataBase` : `process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.latelierdamande.fr'`
+- `metadataBase` : `process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.latelierdamande.com'` (domaine réel : **latelierdamande.com**)
+- Canonical relatif (`alternates.canonical: './'`) — chaque page obtient son propre canonical
+- `<MotionConfig reducedMotion="user">` global via `components/motion-provider.tsx` + règle CSS `prefers-reduced-motion` dans `globals.css`
 - Template de titre : `"%s | L'Atelier d'Amande"`
 - JSON-LD `BeautySalon` injecté dans `<body>` : adresse complète, horaires split (mardi/jeudi avec coupures), sameAs (Instagram, Facebook, Planity), aggregateRating 5.0/7 avis
 - OG image dynamique (`app/opengraph-image.tsx`) : éviter les caractères Unicode spéciaux (★ casse le chargement de police dans `next/og`)
@@ -171,7 +174,8 @@ Chaque section est un composant client dans `components/`. Ils sont autonomes : 
 ### Conventions importantes
 
 - Tout composant qui utilise des hooks React ou Framer Motion doit avoir `"use client"` en première ligne.
-- Les images Unsplash s'utilisent directement via `<img>` (pas `<Image>` de Next.js) car `next.config.mjs` a `images: { unoptimized: true }`.
+- Les images s'utilisent directement via `<img>` (pas `<Image>` de Next.js) car `next.config.mjs` a `images: { unoptimized: true }`. Les assets sont pré-compressés à la main (voir ci-dessous) ; ajouter `loading="lazy" decoding="async"` aux images sous la ligne de flottaison.
+- **Compression des assets** : toute nouvelle image doit être redimensionnée (max 1400px, JPEG qualité ~80 via `sips`) avant d'être ajoutée à `public/`. Les PNG sans transparence sont convertis en JPEG.
 - Les images locales (ex: `public/about-photo.png`) s'utilisent aussi via `<img>` pour la même raison. Exception : `<Image>` de Next.js est utilisé dans `navigation.tsx` et `not-found-content.tsx` pour les logos (avec `priority`).
 - **Glow border buttons** : technique GlowCard — `background-attachment: fixed`, coordonnées viewport `--mx`/`--my` sur `:root`, masque CSS `padding-box/border-box intersect`. Un seul listener `pointermove` sur `document.documentElement`, partagé entre tous les `[data-btn]`.
 - La technique de masque CSS pour n'afficher que la bordure : `mask: linear-gradient(transparent, transparent), linear-gradient(white, white); mask-clip: padding-box, border-box; mask-composite: intersect`.
@@ -181,9 +185,10 @@ Chaque section est un composant client dans `components/`. Ils sont autonomes : 
 
 ## Ce qui reste à faire (contenu — côté Amanda)
 
-- **Photos portfolio** : les 12 IDs Unsplash dans `components/portfolio.tsx` sont des placeholders — remplacer par les vraies réalisations ou des photos locales dans `public/`.
 - **Certifications Kittycia** : ajouter badge ou section dédiée si Amanda souhaite valoriser la certification.
 - **Marques & produits** : mentionner les marques utilisées (ex. section "About" ou sous les services).
 - **Descriptions prestations** : préciser VSP (Vernis Semi-Permanent), gainage, etc. si Amanda veut du contenu éducatif.
 - **Coordonnées map** : vérifier que `lat: 46.1502, lng: 6.3563` pointe exactement sur le salon (clic droit Google Maps → "Plus d'infos sur cet endroit" pour affiner).
-- **Déploiement Vercel** : définir `NEXT_PUBLIC_SITE_URL=https://www.latelierdamande.fr` en variable d'environnement. `@vercel/analytics` est déjà installé et conditionnel en production.
+- **Déploiement Vercel** : définir `NEXT_PUBLIC_SITE_URL=https://www.latelierdamande.com` en variable d'environnement. `@vercel/analytics` est déjà installé et conditionnel en production.
+- **Gestionnaire de paquets** : pnpm uniquement (`packageManager` dans `package.json`, `pnpm-lock.yaml`). `pnpm-workspace.yaml` contient `allowBuilds` pour sharp/unrs-resolver (pnpm 11 bloque les scripts de build par défaut).
+- **Lint** : `npm run lint` = ESLint 9 flat config (`eslint.config.mjs`, presets `eslint-config-next`). `react/no-unescaped-entities` désactivée (texte français).

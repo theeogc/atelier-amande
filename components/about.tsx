@@ -6,8 +6,8 @@ import { SectionHeading } from "@/components/ui/section-heading"
 import { FlipButton } from "@/components/ui/flip-button"
 
 const atelierPhotos = [
-  { src: "/atelier-1.png", alt: "L'Atelier d'Amande — ambiance" },
-  { src: "/atelier-2.png", alt: "L'Atelier d'Amande — espace de travail" },
+  { src: "/atelier-1.jpg", alt: "L'Atelier d'Amande — ambiance" },
+  { src: "/atelier-2.jpg", alt: "L'Atelier d'Amande — espace de travail" },
   { src: "/atelier-3.jpg", alt: "L'Atelier d'Amande — détail" },
 ]
 
@@ -54,8 +54,10 @@ export function About() {
                 style={{ borderRadius: "1rem 2.5rem 1rem 2.5rem" }}
               >
                 <img
-                  src="/about-photo.png"
+                  src="/about-photo.jpg"
                   alt="Amanda"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                   style={{ objectPosition: "center 25%" }}
                 />
@@ -135,6 +137,8 @@ export function About() {
                           <img
                             src={photo.src}
                             alt={photo.alt}
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover"
                           />
                         </motion.div>
@@ -179,8 +183,10 @@ export function About() {
                 transition={{ duration: 1.2, ease: "circOut", delay: 0.15 }}
               >
                 <motion.img
-                  src="/about-photo.png"
+                  src="/about-photo.jpg"
                   alt="Amanda — L'Atelier d'Amande"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                   style={{ objectPosition: "center 25%" }}
                   initial={{ scale: 1.08 }}

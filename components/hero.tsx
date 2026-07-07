@@ -70,7 +70,7 @@ function GlowButton({
       className="relative inline-flex items-center justify-center gap-2 px-8 py-[14px] rounded-full text-sm font-medium tracking-wide"
       style={{
         backgroundColor: isPrimary ? "#1a0f0a" : "transparent",
-        color: isPrimary ? "white" : "rgba(255,255,255,0.55)",
+        color: isPrimary ? "white" : "rgba(255,255,255,0.70)",
         ...(isPrimary ? {} : { border: "1px solid rgba(255,255,255,0.08)" }),
       }}
     >
@@ -163,12 +163,29 @@ export function Hero() {
   }, [wordIndex])
 
   useEffect(() => {
-    const sync = (e: PointerEvent) => {
-      document.documentElement.style.setProperty("--mx", e.clientX.toFixed(2))
-      document.documentElement.style.setProperty("--my", e.clientY.toFixed(2))
+    let frame: number | null = null
+    let lastX = 0
+    let lastY = 0
+
+    const apply = () => {
+      frame = null
+      document.documentElement.style.setProperty("--mx", lastX.toFixed(2))
+      document.documentElement.style.setProperty("--my", lastY.toFixed(2))
     }
+
+    const sync = (e: PointerEvent) => {
+      lastX = e.clientX
+      lastY = e.clientY
+      if (frame === null) {
+        frame = requestAnimationFrame(apply)
+      }
+    }
+
     document.addEventListener("pointermove", sync)
-    return () => document.removeEventListener("pointermove", sync)
+    return () => {
+      document.removeEventListener("pointermove", sync)
+      if (frame !== null) cancelAnimationFrame(frame)
+    }
   }, [])
 
   return (
@@ -232,7 +249,7 @@ export function Hero() {
         {/* Subtitle */}
         <motion.p
           className="text-sm sm:text-base leading-relaxed mb-10 max-w-md font-light"
-          style={{ color: "rgba(255,255,255,0.48)" }}
+          style={{ color: "rgba(255,255,255,0.62)" }}
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
@@ -294,8 +311,8 @@ export function Hero() {
             </div>
             <div className="text-sm leading-none">
               <span className="font-semibold text-white">5,0</span>
-              <span style={{ color: "rgba(255,255,255,0.38)" }}>/5</span>
-              <span className="ml-2" style={{ color: "rgba(255,255,255,0.38)" }}>
+              <span style={{ color: "rgba(255,255,255,0.55)" }}>/5</span>
+              <span className="ml-2" style={{ color: "rgba(255,255,255,0.55)" }}>
                 Avis Google
               </span>
             </div>

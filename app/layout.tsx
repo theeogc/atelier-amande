@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Cormorant_Garamond, Jost } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { MotionProvider } from '@/components/motion-provider'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -23,7 +24,7 @@ const jost = Jost({
   display: 'swap',
 })
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.latelierdamande.fr'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.latelierdamande.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -74,7 +75,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: SITE_URL,
+    canonical: './',
   },
 }
 
@@ -143,7 +144,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <MotionProvider>{children}</MotionProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

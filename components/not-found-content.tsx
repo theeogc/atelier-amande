@@ -108,7 +108,7 @@ export function NotFoundContent() {
         </h1>
         <p
           className="text-sm sm:text-base leading-relaxed font-light"
-          style={{ color: "rgba(255,255,255,0.42)" }}
+          style={{ color: "rgba(255,255,255,0.58)" }}
         >
           L'adresse que vous cherchez n'existe plus, ou n'a jamais existé.
           Retournez à l'accueil pour retrouver votre chemin.

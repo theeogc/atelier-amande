@@ -5,6 +5,7 @@ import {
   AnimatePresence,
   motion,
   useMotionValue,
+  useReducedMotion,
   useTransform,
 } from "framer-motion"
 
@@ -57,24 +58,18 @@ const nailPhotos = [
   "/portfolio/IMG_1514.jpg",
   "/portfolio/IMG_1515.jpg",
   "/portfolio/IMG_1516.jpg",
-  "/portfolio/IMG_1517.PNG",
+  "/portfolio/IMG_1517.jpg",
   "/portfolio/IMG_1518.jpg",
   "/portfolio/IMG_1519.jpg",
-  "/portfolio/chatgpt-1.png",
-  "/portfolio/chatgpt-2.png",
-  "/portfolio/chatgpt-3.png",
-  "/portfolio/chatgpt-4.png",
-  "/portfolio/chatgpt-5.png",
-  "/portfolio/chatgpt-6.png",
+  "/portfolio/chatgpt-1.jpg",
+  "/portfolio/chatgpt-2.jpg",
+  "/portfolio/chatgpt-3.jpg",
+  "/portfolio/chatgpt-4.jpg",
+  "/portfolio/chatgpt-5.jpg",
+  "/portfolio/chatgpt-6.jpg",
 ]
 
 const BASE_SPEED = 0.04 // degrés par frame (~2.4°/s à 60fps)
-
-const transitionImg = {
-  duration: 0.15,
-  ease: [0.32, 0.72, 0, 1] as const,
-}
-const transitionOverlay = { duration: 0.5, ease: [0.32, 0.72, 0, 1] as const }
 
 const Carousel = memo(
   ({
@@ -101,12 +96,14 @@ const Carousel = memo(
     const isDraggingRef = useRef(false)
     const rafRef = useRef<number>(0)
     const isActiveRef = useRef(isCarouselActive)
+    const prefersReducedMotion = useReducedMotion()
 
     useEffect(() => {
       isActiveRef.current = isCarouselActive
     }, [isCarouselActive])
 
     useEffect(() => {
+      if (prefersReducedMotion) return
       const animate = () => {
         if (!isDraggingRef.current && isActiveRef.current) {
           rotation.set(rotation.get() + speedRef.current)
@@ -117,7 +114,7 @@ const Carousel = memo(
       }
       rafRef.current = requestAnimationFrame(animate)
       return () => cancelAnimationFrame(rafRef.current)
-    }, [rotation])
+    }, [rotation, prefersReducedMotion])
 
     return (
       <div
@@ -162,6 +159,8 @@ const Carousel = memo(
               <img
                 src={imgUrl}
                 alt={`Réalisation ongulaire ${i + 1}`}
+                loading="lazy"
+                decoding="async"
                 className="pointer-events-none w-full rounded-xl object-cover aspect-square"
               />
             </motion.div>
@@ -206,6 +205,7 @@ function ThreeDPhotoCarousel() {
             {/* Bouton fermer */}
             <button
               onClick={handleClose}
+              aria-label="Fermer l'aperçu"
               className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center cursor-pointer"
               style={{ backgroundColor: "rgba(255,255,255,0.15)", color: "white" }}
             >
@@ -215,6 +215,7 @@ function ThreeDPhotoCarousel() {
             </button>
             <motion.img
               src={activeImg}
+              alt="Réalisation ongulaire — L'Atelier d'Amande"
               className="max-w-full max-h-full rounded-2xl shadow-2xl object-contain"
               initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -267,6 +268,8 @@ function ThreeDPhotoCarousel() {
                   <img
                     src={imgUrl}
                     alt="Réalisation"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>

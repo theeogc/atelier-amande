@@ -58,6 +58,8 @@ export function Footer() {
         <img
           src="/logo-monogramme.png"
           alt="L'Atelier d'Amande"
+          loading="lazy"
+          decoding="async"
           className="w-12 h-12 object-contain"
         />
         <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">

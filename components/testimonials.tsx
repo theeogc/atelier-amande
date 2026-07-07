@@ -71,7 +71,7 @@ function GoogleIcon() {
 
 function PlanityIcon() {
   return (
-    <span className="text-[10px] font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.35)" }}>
+    <span className="text-[10px] font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.52)" }}>
       P
     </span>
   )
@@ -93,7 +93,7 @@ function ReviewCard({ review }: { review: Review }) {
             <Star key={i} className="w-2.5 h-2.5 md:w-3 md:h-3 fill-[#C4956A] text-[#C4956A]" />
           ))}
         </div>
-        <div className="flex items-center gap-1" style={{ color: "rgba(255,255,255,0.35)" }}>
+        <div className="flex items-center gap-1" style={{ color: "rgba(255,255,255,0.52)" }}>
           {review.source === "Google" ? <GoogleIcon /> : <PlanityIcon />}
           <span className="text-[9px] md:text-[10px] tracking-wide">{review.source}</span>
         </div>
