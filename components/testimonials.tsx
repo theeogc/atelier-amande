@@ -29,6 +29,24 @@ const row1: Review[] = [
     rating: 5,
     text: "Franchement, Amanda est au top ! Elle est super gentille, très accueillante et met tout de suite à l'aise. Son travail est impeccable, mes ongles sont toujours parfaits et tiennent super bien. C'est un vrai plaisir d'y aller, je recommande les yeux fermés !",
   },
+  {
+    name: "Gaëlle Goncalves",
+    source: "Google",
+    rating: 5,
+    text: "Très bel accueil. J'ai passé un agréable moment. Pose de semi-permanent aux pieds au top. Je reviendrai régulièrement. Je recommande vivement Amanda.",
+  },
+  {
+    name: "Barbara",
+    source: "Planity",
+    rating: 5,
+    text: "Quel plaisir d'avoir pu bénéficier des soins d'Amanda ! Au top, merci !",
+  },
+  {
+    name: "Coralie",
+    source: "Planity",
+    rating: 5,
+    text: "Super ! Merci beaucoup",
+  },
 ]
 
 const row2: Review[] = [
@@ -55,6 +73,18 @@ const row2: Review[] = [
     source: "Google",
     rating: 5,
     text: "Deux visites déjà à l'Atelier d'Amande, et je suis ravie. Amanda est très minutieuse, à l'écoute, ouverte et vraiment sympathique. La pose gel est impeccable et le nail art est parfaitement exécuté selon ma demande.",
+  },
+  {
+    name: "Josiane",
+    source: "Planity",
+    rating: 5,
+    text: "Accueil, prestation, ambiance, tout était parfait. Je reviendrais",
+  },
+  {
+    name: "Une cliente",
+    source: "Planity",
+    rating: 5,
+    text: "Tout était parfait ! J'y retournerai avec grand plaisir !",
   },
 ]
 
